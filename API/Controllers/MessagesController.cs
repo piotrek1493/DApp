@@ -35,7 +35,7 @@ public class MessagesController : BaseApiController
         var recipient =
             await _userRepository.GetUserByUsernameAsync(createMessageDto.RecipientUsername, cancellationToken);
 
-        if (recipient == null) return NotFound();
+        if (recipient == null || sender == null || sender.UserName == null || recipient.UserName == null) return NotFound();
 
         var message = new Message
         {
