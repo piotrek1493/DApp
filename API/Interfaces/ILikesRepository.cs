@@ -2,12 +2,11 @@
 using API.Entities;
 using API.Helpers;
 
-namespace API.Interfaces
+namespace API.Interfaces;
+
+public interface ILikesRepository
 {
-    public interface ILikesRepository
-    {
-        Task<UserLike> GetUserLikeAsync(int sourceUserId, int targetUserId, CancellationToken cancellationToken);
-        Task<AppUser> GetUserWithLikesAsync(int userId, CancellationToken cancellationToken);
-        Task<PagedList<LikeDto>> GetUserLikesAsync(LikesParams likesParams, CancellationToken cancellationToken);
-    }
+    Task<UserLike> GetUserLikeAsync(int sourceUserId, int targetUserId, CancellationToken cancellationToken);
+    Task<AppUser> GetUserWithLikesAsync(int userId, CancellationToken cancellationToken);
+    Task<PagedList<LikeDto>> GetUserLikesAsync(LikesParams likesParams, CancellationToken cancellationToken);
 }
