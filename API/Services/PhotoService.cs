@@ -29,7 +29,7 @@ namespace API.Services
 
             if (file.Length > 0)
             {
-                using var stream = file.OpenReadStream();
+                await using var stream = file.OpenReadStream();
                 var uploadParams = new ImageUploadParams
                 {
                     File = new FileDescription(file.FileName, stream),

@@ -31,9 +31,9 @@ public class MessagesController : BaseApiController
             return BadRequest("You cannot send messages to yourself.");
         }
 
-        var sender = await _userRepository.GetUserByUsernameAsync(username, cancellationToken);
+        var sender = await _userRepository.GetUserByUsernameAsync(username);
         var recipient =
-            await _userRepository.GetUserByUsernameAsync(createMessageDto.RecipientUsername, cancellationToken);
+            await _userRepository.GetUserByUsernameAsync(createMessageDto.RecipientUsername);
 
         if (recipient == null || sender == null || sender.UserName == null || recipient.UserName == null) return NotFound();
 

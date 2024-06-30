@@ -1,6 +1,5 @@
 ﻿using API.DTOs;
 using API.Entities;
-using API.Extensions;
 using API.Helpers;
 using API.Interfaces;
 using AutoMapper;
@@ -25,11 +24,11 @@ namespace API.Data
             return await _context.Users.FindAsync(new object[] { id, cancellationToken }, cancellationToken);
         }
 
-        public async Task<AppUser> GetUserByUsernameAsync(string username, CancellationToken cancellationToken)
+        public async Task<AppUser> GetUserByUsernameAsync(string username)
         {
             return await _context.Users
                 .Include(p => p.Photos)
-                .SingleOrDefaultAsync(u => u.UserName == username, cancellationToken);
+                .SingleOrDefaultAsync(u => u.UserName == username);
         }
 
         public async Task<IEnumerable<AppUser>> GetUsersAsync(CancellationToken cancellationToken)

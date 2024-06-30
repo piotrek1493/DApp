@@ -27,7 +27,7 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<PagedList<MemberDto>>> GetUsers([FromQuery] UserParams userParams, CancellationToken cancellationToken)
         {
-            var currentUser = await _userRepository.GetUserByUsernameAsync(User.GetUsername(), cancellationToken);
+            var currentUser = await _userRepository.GetUserByUsernameAsync(User.GetUsername());
             userParams.CurrentUsername = currentUser.UserName;
 
             if (string.IsNullOrEmpty(userParams.Gender))
@@ -52,7 +52,7 @@ namespace API.Controllers
         [HttpPut]
         public async Task<ActionResult> UpdateUser([FromBody] MemberUpdateDto memberUpdateDto, CancellationToken cancellationToken)
         {
-            var user = await _userRepository.GetUserByUsernameAsync(User.GetUsername(), cancellationToken);
+            var user = await _userRepository.GetUserByUsernameAsync(User.GetUsername());
 
             if (user == null) return NotFound();
 
@@ -72,7 +72,7 @@ namespace API.Controllers
         [ProducesResponseType(typeof(HttpStatusCode), 201)]
         public async Task<ActionResult> AddPhoto([FromBody] IFormFile file, CancellationToken cancellationToken)
         {
-            var user = await _userRepository.GetUserByUsernameAsync(User.GetUsername(), cancellationToken);
+            var user = await _userRepository.GetUserByUsernameAsync(User.GetUsername());
 
             if (user == null) return NotFound();
 
@@ -109,7 +109,7 @@ namespace API.Controllers
         [ProducesResponseType(typeof(HttpStatusCode), 200)]
         public async Task<ActionResult> SetMainPhoto([FromRoute] int photoId, CancellationToken cancellationToken)
         {
-            var user = await _userRepository.GetUserByUsernameAsync(User.GetUsername(), cancellationToken);
+            var user = await _userRepository.GetUserByUsernameAsync(User.GetUsername());
 
             if (user == null) return NotFound();
 
@@ -136,7 +136,7 @@ namespace API.Controllers
         [ProducesResponseType(typeof(HttpStatusCode), 204)]
         public async Task<ActionResult> DeletePhoto([FromRoute] int photoId, CancellationToken cancellationToken)
         {
-            var user = await _userRepository.GetUserByUsernameAsync(User.GetUsername(), cancellationToken);
+            var user = await _userRepository.GetUserByUsernameAsync(User.GetUsername());
 
             if (user == null) return NotFound();
 
